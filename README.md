@@ -2,6 +2,8 @@
 
 Arduino based USB interface board for Keithley 616 digital electrometer. Somewhat inspired by Keithley 6162 Isolated Output and Control module, but with a modern computer interface.
 
+![K616_USB_IF_TopImage](TopImage.jpg)
+
 ## Firmware features
 
 - Presents a common USB serial interface
