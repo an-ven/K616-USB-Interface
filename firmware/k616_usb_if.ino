@@ -241,12 +241,13 @@ void makeOutStr(uint8_t timeout) {
   // Add instrument state indicators
   output_str += " ";
   if (timeout) {        // if count timeout condition is present
-    output_str += "ERR";  // Print count timeout error
+    output_str += "E";  // Print count timeout error
   
   } else {              // else add normal status indicators to output string
     output_str += (count_latest < 2000) ? (!digitalRead(ZCHK_IN) ? "Z" : "N") : "O";  // Normal/Overflow/ZeroCheck indicator
     if (instrument_flags.remote_zero) output_str += "R";    // Display remote zero check indicator
     output_str += instrument_flags.manual_sens ? "M" : "A"; // Auto/Manual sensitivity indicator
+    output_str += String(s-2);                              // Sensitivity range indicator
     if (instrument_flags.disp_hold) output_str += "H";      // Display hold indicator
   }
 }
@@ -255,8 +256,9 @@ void makeOutStr(uint8_t timeout) {
 void makeHumanString(uint8_t timeout) {
   output_str = "";            // Start with an empty string
 
+  uint8_t s  = getSensitivity();  // Get sensitivity setting number
   int8_t e = getExponent();   // Get range switch exponent
-  e += getSensitivity() - 5;  // Add sensitivity setting exponent to range switch exponent
+  e += s - 5;                 // Add sensitivity setting exponent to range switch exponent
 
   int8_t i_pfx;               // Unit prefix character index variable
   int8_t e_mod;               // Mantissa scaling exponent variable
@@ -290,6 +292,7 @@ void makeHumanString(uint8_t timeout) {
     output_str += (count_latest < 2000) ? (!digitalRead(ZCHK_IN) ? "Zero " : "Normal ") : "Overflow ";  // Normal/Overflow/ZeroCheck indicator
     if (instrument_flags.remote_zero) output_str += "Remote ";        // Display remote zero check indicator
     output_str += instrument_flags.manual_sens ? "Manual " : "Auto "; // Auto/Manual sensitivity indicator
+    output_str += "Sensitivity=" + String(s-2) + " ";                 // Sensitivity range indicator
     if (instrument_flags.disp_hold) output_str += "Display Hold";     // Display hold indicator
   }
 }

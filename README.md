@@ -38,7 +38,9 @@ In normal or "compact" output mode (selected by sending `u` command character) t
 - `R` ... Remote Zero Check
 - `A` ... Auto sensitivity
 - `M` ... Manual sensitivity
+- `n` ... Sensitivity range number where `n={1,2,3,4,5}`
 - `H` ... Display hold enabled 
+- `E` ... Count error (instrument probably off)
 
 In human friendly output mode (selected by sending `U` command character) the number of decimal places and unit prefix are determined based on what is most appropriate for currently selected range and sensitivity settings. The instrument state indicator characters get replaced by whole words separated by space characters.
 
@@ -46,27 +48,27 @@ In human friendly output mode (selected by sending `U` command character) the nu
 
 Normal operation (measuring resistance, automatic sensitivity):
 
-    +0.993E9 Ohm NA
+    +0.993E9 Ohm NA3
 
 Human friendly unit display (same conditions as above):
 
-    +0.992 GOhm Normal Auto
+    +0.992 GOhm Normal Auto Sensitivity=3
 
 Remote zero check enabled:
 
-    -0.00000E-6 A ZRA
+    -0.00000E-6 A ZRA1
 
-    -0.00 nA Zero Remote Auto
+    -0.00 nA Zero Remote Auto Sensitivity=1
 
 Overflow condition, manual sensitivity:
 
-    +0.2016E0 V OM
+    +0.2016E0 V OM2
 
-    +201.6 mV Overflow Manual
+    +201.6 mV Overflow Manual Sensitivity=2
 
 Instrument powered off (no "gated clock" and "count now" signals detected)
 
-    -999.9E-6 A ERR
+    -999.9E-6 A E
 
     -999.9 uA Count Error
 
